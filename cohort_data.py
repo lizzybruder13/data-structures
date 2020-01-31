@@ -22,7 +22,7 @@ def unique_houses(filename):
     houses1 = [person1[2] for person1 in students1]
 
     houses = set(houses1)
-    
+
     houses.remove('')
 
     hogwarts.close()
@@ -46,14 +46,41 @@ def sort_by_cohort(filename):
     [['Harry Potter', 'Mandy Brocklehurst', 'Ron Weasley', 'Oliver Wood', 'Colin Creevey', 'Cho Chang', 'Michael Corner', 'Draco Malfoy', 'Seamus Finnigan', 'Eddie Carmichael', 'Theodore Nott', 'Terence Higgs', 'Hermione Granger', 'Penelope Clearwater', 'Angelina Johnson', 'Dennis Creevey'], ['Neville Longbottom', 'Cedric Diggory', 'Pansy Parkinson', 'Anthony Goldstein', 'Padma Patil', 'Luna Lovegood', 'Eleanor Branstone', 'Lee Jordan', 'Marietta Edgecombe', 'Andrew Kirke', 'Ginny Weasley', 'Mary Macdonald', 'Blaise Zabini', 'Natalie McDonald', 'Adrian Pucey', 'Hannah Abbott', 'Graham Pritchard', 'Susan Bones', 'Roger Davies', 'Owen Cauldwell'], ['Laura Madley', 'Orla Quirke', 'Parvati Patil', 'Eloise Midgeon', 'Zacharias Smith', 'Cormac McLaggen', 'Lisa Turpin', 'Demelza Robins', 'Ernie Macmillan', 'Millicent Bullstrode', 'Percy Weasley', 'Jimmy Peakes', 'Justin Finch-Fletchley', 'Miles Bletchley', 'Malcolm Baddock'], ['Marcus Belby', 'Euan Abercrombie', 'Vincent Crabbe', 'Ritchie Coote', 'Katie Bell', 'Terry Boot', 'Lavender Brown', 'Gregory Goyle', 'Marcus Flint', 'Dean Thomas', 'Jack Sloper', 'Rose Zeller', 'Stewart Ackerley', 'Fred Weasley', 'George Weasley', 'Romilda Vane', 'Alicia Spinnet', 'Kevin Whitby'], ['Friendly Friar', 'Grey Lady', 'Nearly Headless Nick', 'Bloody Baron']]
     """
 
-    all_students = []
-    winter_16 = []
-    spring_16 = []
-    summer_16 = []
-    fall_15 = []
-    ghosts = []
+    with open('cohort_data.txt') as hogwarts:
 
-    # Code goes here
+        students = [individual for individual in hogwarts]
+        students1 = [person.split('|') for person in students]
+
+        all_students = []
+        winter_16 = []
+        spring_16 = []
+        summer_16 = []
+        fall_15 = []
+        ghosts = []
+
+        for student in students1:
+
+            cohort = student[4].rstrip()
+            f_l_name = student[0:2]
+            name = f_l_name[0] + " " + f_l_name[1]
+
+            if cohort == 'G':
+                ghosts.extend([name])
+            if cohort == 'Winter 2016':
+                winter_16.extend([name])
+            if cohort == 'Spring 2016':
+                spring_16.extend([name])
+            if cohort == 'Summer 2016':
+                summer_16.extend([name])
+            if cohort == 'Fall 2015':
+                fall_15.extend([name])
+
+        # combining all the lists into one list
+        # sort in the order they want 
+
+        all_students.extend([fall_15, winter_16, spring_16, summer_16, ghosts])
+        
+        # Code goes here
 
     return all_students
 
