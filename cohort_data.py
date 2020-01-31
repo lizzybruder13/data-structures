@@ -99,14 +99,33 @@ def hogwarts_by_house(filename):
 
     """
 
-    all_hogwarts = []
-    dumbledores_army = []
-    gryffindor = []
-    hufflepuff = []
-    ravenclaw = []
-    slytherin = []
-    ghosts = []
-    instructors = []
+    with open('cohort_data.txt') as hogwarts:
+
+        students = [individual for individual in hogwarts]
+        students1 = [person.split('|') for person in students]
+
+        all_hogwarts = []
+        dumbledores_army = []
+        gryffindor = []
+        hufflepuff = []
+        ravenclaw = []
+        slytherin = []
+        ghosts = []
+        instructors = []
+
+        for littlepeople in students1:
+
+            f_l_name = littlepeople[0:2]
+            name = f_l_name[0] + " " + f_l_name[1]
+
+            if littlepeople[2] == 'Gryffindor':
+                gryffindor.extend([name])
+            if littlepeople[2] == "Dumbledore's army":
+                dumbledores_army.extend([name])
+
+
+
+            
 
     # Code goes here
 
